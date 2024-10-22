@@ -37,7 +37,7 @@ class Adapter : RecyclerView.Adapter<Adapter.AppHolder>() {
                 ItemTypeInterface.SINGER_TYPE -> SingerHolder(
                 SingersLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
-            else -> throw IllegalArgumentException("Invalid view type") // Обробка невідомих типів
+            else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 

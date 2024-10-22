@@ -8,7 +8,7 @@ import com.example.lab_3.model.Music
 import com.example.lab_3.model.Singer
 
 class MyViewModel(app: Application) : AndroidViewModel(app) {
-    // Використовуємо public LiveData для спостереження
+
     val musics = MutableLiveData<List<ItemTypeInterface>>().apply {
         value = listOf(
             Music("Shape of you", "Ed Sheeran", "2016", "÷"),
@@ -24,14 +24,14 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
 
     fun addMusic() {
         val newMusic = Music("Music 1", "Singer 1", "1", "Album 1")
-        // Додаємо нову музику до існуючого списку
+
         val updatedList = musics.value?.toMutableList() ?: mutableListOf()
         updatedList.add(newMusic)
         musics.postValue(updatedList)
     }
     fun addSinger() {
         val newSinger = Singer("Name 1", "Surname 1")
-        // Додаємо нову музику до існуючого списку
+
         val updatedList = musics.value?.toMutableList() ?: mutableListOf()
         updatedList.add(newSinger)
         musics.postValue(updatedList)

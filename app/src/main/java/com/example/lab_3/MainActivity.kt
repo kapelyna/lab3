@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Ініціалізація адаптера
-        adapter = Adapter()
-        recyclerView.adapter = adapter // Встановлення адаптера
 
-        // Ініціалізація ViewModel через ViewModelProvider
+        adapter = Adapter()
+        recyclerView.adapter = adapter
+
+
         viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
-        // Спостереження за даними у ViewModel
+
         viewModel.musics.observe(this) { musics ->
             adapter.submit(musics)
         }
