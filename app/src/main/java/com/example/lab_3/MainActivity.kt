@@ -6,8 +6,8 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.ViewModelProvider
-import com.example.lab_3.model.Adapter
-
+import com.example.lab_3.model.Music
+import com.example.lab_3.model.Singer
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,14 +35,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.musics.observe(this) { musics ->
             adapter.submit(musics)
         }
+        viewModel.singers.observe(this) { singers ->
+            adapter.submit(singers)
+        }
 
         addButton = findViewById(R.id.addMusic)
         addButton.setOnClickListener {
-            viewModel.addMusic()
+            viewModel.addMusic(Music("music1", 1, "2024", "album"))
         }
         addButton = findViewById(R.id.addSinger)
         addButton.setOnClickListener {
-            viewModel.addSinger()
+            viewModel.addSinger(Singer("NameSinger", "SurnameSinger"))
         }
     }
 }

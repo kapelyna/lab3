@@ -3,37 +3,49 @@ package com.example.lab_3
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.lab_3.model.ItemTypeInterface
+import androidx.lifecycle.viewModelScope
 import com.example.lab_3.model.Music
 import com.example.lab_3.model.Singer
+import com.example.lab_3.repo.NewRepo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyViewModel(app: Application) : AndroidViewModel(app) {
 
-    val musics = MutableLiveData<List<ItemTypeInterface>>().apply {
-        value = listOf(
-            Music("Shape of you", "Ed Sheeran", "2016", "÷"),
-            Singer("Miley", "Cyrus"),
-            Music("Blinding Lights", "The Weeknd", "2019", "After Hours"),
-            Music("Levitating", "Dua Lipa", "2020", "Future Nostalgia"),
-            Music("Watermelon Sugar", "Harry Styles", "2019", "Fine Line"),
-            Singer("Freddie", "Mercury"),
-            Music("Shallow", "Lady Gaga & Bradley Cooper", "2018", "A Star Is Born"),
-            Music("Old Town Road", "Lil Nas X", "2019", "7 EP"),
-        )
+
+    private val repository: NewRepo = (app as App).appRepo
+
+    val musics = MutableLiveData<List<Music>>()
+    val singers = MutableLiveData<List<Singer>>()
+
+    init {
+        loadAllMusics()
+        loadAllSingers()
     }
 
-    fun addMusic() {
-        val newMusic = Music("Music 1", "Singer 1", "1", "Album 1")
-
-        val updatedList = musics.value?.toMutableList() ?: mutableListOf()
-        updatedList.add(newMusic)
-        musics.postValue(updatedList)
+    private fun loadAllMusics() {
+        viewModelScope.launch(Dispatchers.IO) {
+            musics.postValue(repository.getAllMusics())
+        }
     }
-    fun addSinger() {
-        val newSinger = Singer("Name 1", "Surname 1")
 
-        val updatedList = musics.value?.toMutableList() ?: mutableListOf()
-        updatedList.add(newSinger)
-        musics.postValue(updatedList)
+    private fun loadAllSingers() {
+        viewModelScope.launch(Dispatchers.IO) {
+            singers.postValue(repository.getAllSingers())
+        }
+    }
+
+    fun addMusic(music: Music) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addMusic(music)
+            loadAllMusics()
+        }
+    }
+
+    fun addSinger(singer: Singer) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addSinger(singer)
+            loadAllSingers()
+        }
     }
 }

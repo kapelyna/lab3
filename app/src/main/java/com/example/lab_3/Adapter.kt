@@ -1,16 +1,14 @@
-package com.example.lab_3.model
+package com.example.lab_3
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.lab_3.model.Music
 import com.example.lab_3.model.ItemTypeInterface
 import com.example.lab_3.databinding.MusicLayoutBinding
 import com.example.lab_3.databinding.SingersLayoutBinding
+import com.example.lab_3.model.Singer
 
 
 class Adapter : RecyclerView.Adapter<Adapter.AppHolder>() {
@@ -34,7 +32,7 @@ class Adapter : RecyclerView.Adapter<Adapter.AppHolder>() {
                     false
                 )
             )
-                ItemTypeInterface.SINGER_TYPE -> SingerHolder(
+            ItemTypeInterface.SINGER_TYPE -> SingerHolder(
                 SingersLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
             else -> throw IllegalArgumentException("Invalid view type")
@@ -57,7 +55,7 @@ class Adapter : RecyclerView.Adapter<Adapter.AppHolder>() {
         override fun bind(item: ItemTypeInterface) {
             item as Music
             itemViewBinding.musicName.text = item.name
-            itemViewBinding.musicSinger.text = item.singer
+            itemViewBinding.musicSinger.text = item.singerId.toString()
             itemViewBinding.musicYear.text = item.year
             itemViewBinding.musicAlbum.text = item.album
         }
