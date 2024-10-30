@@ -10,13 +10,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-<<<<<<< HEAD
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-=======
         android:layout_width="0dp"
         android:layout_height="match_parent"
->>>>>>> a59c66ce069f75c3911967e8551c11eaefe9024f
+
 
         app:layout_constraintBottom_toBottomOf="@+id/addMusic"
         app:layout_constraintEnd_toEndOf="parent"
