@@ -5,48 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/music_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Music Name"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/inclMusicSinger"
+        app:layout_constraintHorizontal_chainStyle="spread" />
 
-
-    <TextView
-        android:id="@+id/music_singer"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/inclMusicSinger"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:text="Singer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        layout="@layout/singers_layout"
         app:layout_constraintStart_toEndOf="@+id/music_name"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/music_year" />
 
     <TextView
         android:id="@+id/music_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:text="Year"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/music_singer"
+        app:layout_constraintStart_toEndOf="@+id/inclMusicSinger"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/music_album" />
 
     <TextView
         android:id="@+id/music_album"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="Album"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/music_year"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/music_year"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

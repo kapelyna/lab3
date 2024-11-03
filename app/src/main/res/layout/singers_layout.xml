@@ -20,14 +20,24 @@
         android:id="@+id/singer_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
         android:text="Surname"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSingerDel"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toEndOf="@+id/singer_name"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.448" />
 
+    <Button
+        android:id="@+id/btnSingerDel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Delete singer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

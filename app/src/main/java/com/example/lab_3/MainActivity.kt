@@ -6,46 +6,54 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.lab_3.model.Music
 import com.example.lab_3.model.Singer
+import com.example.lab_3.databinding.ActivityMainBinding
+import com.example.lab_3.model.ItemTypeInterface
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
-    private lateinit var viewModel: MyViewModel
-    private lateinit var adapter: Adapter
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var addButton: Button
+    lateinit var viewModel: MyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-
-        adapter = Adapter()
-        recyclerView.adapter = adapter
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewModel.musics.observe(this) { musics ->
-            adapter.submit(musics)
+        val onClc = object : Adapter.OnClickListener {
+            override fun onClick(item: ItemTypeInterface, num: Int) {
+                when (item) {
+                    is Singer -> {
+                        viewModel.delSinger(item)
+                    }
+                }
+            }
         }
-        viewModel.singers.observe(this) { singers ->
-            adapter.submit(singers)
+        val myAdapter = Adapter(viewModel.myList, onClc)
+
+        recyclerView.adapter = myAdapter
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        viewModel.myList.observe(this) {
+            myAdapter.notifyDataSetChanged()
         }
 
-        addButton = findViewById(R.id.addMusic)
-        addButton.setOnClickListener {
-            viewModel.addMusic(Music("music1", 1, "2024", "album"))
+        // Додати співака
+        binding.addSinger.setOnClickListener {
+            viewModel.addSinger(Singer("New Singer", "New Surname"))
         }
-        addButton = findViewById(R.id.addSinger)
-        addButton.setOnClickListener {
-            viewModel.addSinger(Singer("NameSinger", "SurnameSinger"))
+
+        // Додати випадкову пісню
+        binding.addMusic.setOnClickListener {
+            viewModel.addRandomMusic("New song","2024","album")
         }
     }
 }

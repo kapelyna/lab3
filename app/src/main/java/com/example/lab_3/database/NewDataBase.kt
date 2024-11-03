@@ -9,7 +9,7 @@ import com.example.lab_3.dao.NewDao
 import com.example.lab_3.model.Music
 import com.example.lab_3.model.Singer
 
-@Database(entities = [Singer::class, Music::class], version = 1)
+@Database(entities = [Singer::class, Music::class], version =2, exportSchema = false)
 abstract class NewDataBase : RoomDatabase(){
     abstract fun newDao() : NewDao
 
@@ -23,7 +23,9 @@ abstract class NewDataBase : RoomDatabase(){
                     context,
                     NewDataBase::class.java,
                     "app_db.db3"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
         }
