@@ -5,13 +5,13 @@ import androidx.room.Embedded
 
 data class MusicWithSingers(
     @ColumnInfo(name = "name")
-    var musicName: String,
+    var musicName: String?,
     @ColumnInfo(name = "year")
-    var year: String,
+    var year: String?,
     @ColumnInfo(name="album")
-    var album: String,
+    var album: String?,
     @ColumnInfo(name = "id_music")
-    var idMusic: Long,
+    var idMusic: Long?,
     @Embedded
-    val singer: Singer
+    val singer: Singer?
 )

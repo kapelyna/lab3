@@ -2,6 +2,7 @@ package com.example.lab_3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -53,7 +54,10 @@ class MainActivity : AppCompatActivity() {
 
         // Додати випадкову пісню
         binding.addMusic.setOnClickListener {
-            viewModel.addRandomMusic("New song","2024","album")
+            val query = "pop" // Або отримай значення з EditText
+            Log.d("MainActivity", "Searching for tracks with query: $query")
+            viewModel.searchTracks(query)
+            //viewModel.addRandomMusic("New song","2024","album")
         }
     }
 }

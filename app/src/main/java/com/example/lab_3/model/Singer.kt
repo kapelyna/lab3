@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "singers")
 data class Singer(
-    @ColumnInfo(name = "singerName") val singerName : String,
-    @ColumnInfo(name = "singerSurname") val singerSurname : String
+    @ColumnInfo(name = "singerName") val singerName : String?,
+    @ColumnInfo(name = "singerSurname") val singerSurname : String?
 ):ItemTypeInterface{
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id_singer")
@@ -18,16 +18,3 @@ data class Singer(
     }
 }
 
-
-
-
-
-
-//data class Singer(
-//    val name:String,
-//    val surname:String,
-//) : ItemTypeInterface {
-//    override fun getType(): Int{
-//        return ItemTypeInterface.SINGER_TYPE;
-//    }
-//}

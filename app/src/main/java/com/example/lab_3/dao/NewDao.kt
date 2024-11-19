@@ -18,6 +18,7 @@ interface NewDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSingers(singers:List<Singer>)
 
+
     @Query("SELECT * FROM musics")
     suspend fun getListOfMusics(): List<Music>
 
@@ -50,6 +51,12 @@ interface NewDao {
 
     @Query("Delete from singers")
     suspend fun deleteAllSingers()
+
+    @Query("SELECT * FROM singers WHERE singerName = :name LIMIT 1")
+    suspend fun getSingerByName(name: String): Singer?
+
+    @Query("SELECT * FROM musics WHERE name = :title AND singerId = :singerId AND album = :album LIMIT 1")
+    suspend fun getMusicByTitleAndArtist(title: String, singerId: kotlin.Long, album: String): Music?
 
 
 }

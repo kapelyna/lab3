@@ -51,6 +51,14 @@ dependencies {
     implementation (libs.kotlin.scripting.compiler.embeddable)
     implementation(libs.androidx.room.ktx)
 
+    val roomVersion = "2.6.1"
+    val retrofitVersion = "2.9.0"
+
+    implementation (libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation (libs.gson)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     //implementation (libs.androidx.recyclerview)

@@ -22,7 +22,7 @@ data class Music(
     @ColumnInfo(name = "singerId") var singerId: Long,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "year") val year: String,
-    @ColumnInfo(name = "album") val album: String,
+    @ColumnInfo(name = "album") val album: String?,
 ) : ItemTypeInterface {
 
     @PrimaryKey(autoGenerate = true)
@@ -39,13 +39,3 @@ data class Music(
         return ItemTypeInterface.MUSIC_TYPE
     }
 }
-//data class Music(
-//    val name:String,
-//    val singer:String,
-//    val year:String,
-//    val album:String
-//) : ItemTypeInterface {
-//     override fun getType(): Int{
-//        return ItemTypeInterface.MUSIC_TYPE;
-//    }
-//}
